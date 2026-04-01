@@ -48,17 +48,18 @@ class DRAISegmentation(ScriptedLoadableModule):
         self.parent.dependencies = []
         self.parent.contributors = ["DRAI Team (Deep Reasoning AI)"]
         self.parent.helpText = (
-            "AI-powered medical image segmentation for Spine/Pelvis and "
-            "Aorta-Iliac-Femoral structures. CT volumes are uploaded to the "
-            "DRAI cloud server for deep-learning inference and multi-label "
-            "segmentation masks are returned directly into 3D Slicer. "
-            'See the <a href="https://github.com/Deep-Reasoning/SlicerDRAISegmentation">'
+            "AI-powered segmentation for Spine/Pelvis (CT) and Aorta–Iliac–Femoral Arteries (CTA). "
+            "Upload CT volumes to the DRAI cloud and receive high-quality, multi-label masks directly in 3D Slicer within minutes."
+            "Built to handle complex cases—including bypass grafts, metal implants, and challenging pathology—with reliable accuracy."
+            "All data is securely processed and deleted immediately after inference. Questions? Contact support@deepreasoningai.com."
+            'See the <a href="https://github.com/DeepReasoningAI/SlicerDRAISegmentation">'
             "documentation</a> for more information."
         )
         self.parent.acknowledgementText = (
             "Developed by Deep Reasoning AI (DRAI). "
             "All uploaded images are deleted from the server immediately "
-            "after segmentation is complete. No data is retained."
+            "after segmentation is complete. No data is retained." 
+            "Questions? Contact support@deepreasoningai.com."
         )
 
 

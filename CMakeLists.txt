@@ -5,13 +5,14 @@ project(DRAISegmentation)
 #-----------------------------------------------------------------------------
 # Extension meta-information
 #-----------------------------------------------------------------------------
-set(EXTENSION_HOMEPAGE "https://github.com/Deep-Reasoning/SlicerDRAISegmentation")
+set(EXTENSION_HOMEPAGE "https://github.com/DeepReasoningAI/SlicerDRAISegmentation")
 set(EXTENSION_CATEGORY "Segmentation")
 set(EXTENSION_CONTRIBUTORS "DRAI Team (Deep Reasoning AI)")
 set(EXTENSION_DESCRIPTION
-  "AI-powered medical image segmentation for Spine/Pelvis and Aorta-Iliac-Femoral structures. "
-  "CT volumes are uploaded to the DRAI cloud server for deep-learning inference and "
-  "multi-label segmentation masks are returned directly into 3D Slicer."
+  "AI-powered segmentation for Spine/Pelvis (CT) and Aorta–Iliac–Femoral Arteries (CTA). "
+  "Upload CT volumes to the DRAI cloud and receive high-quality, multi-label masks directly in 3D Slicer within minutes."
+  "Built to handle complex cases—including bypass grafts, metal implants, and challenging pathology—with reliable accuracy."
+  "All data is securely processed and deleted immediately after inference. Questions? Contact support@deepreasoningai.com."
 )
 set(EXTENSION_ICONURL "https://raw.githubusercontent.com/Deep-Reasoning/SlicerDRAISegmentation/main/DRAISegmentation/Resources/Icons/DRAISegmentation.png")
 set(EXTENSION_SCREENSHOTURLS
