@@ -75,7 +75,11 @@ Once the extension is published in the 3D Slicer Extensions Index:
 *Module panel:*
 
 ![Module UI](Screenshots/UI.png)
+
+*Spine and Pelvis Model Example:*
 ![Spine and Pelvis Model](Screenshots/SpinePelvis.png)
+
+*Aorta-Illiac-Femoral Arteries Model Example:*
 ![Aorta-Illiac-Femoral Arteries Model](Screenshots/AIF.png)
 
 ## Contributing
