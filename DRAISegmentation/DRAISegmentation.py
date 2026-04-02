@@ -27,10 +27,10 @@ except ImportError:
 
 AVAILABLE_MODELS = [
     ("Spine and Pelvis", "spine"),
-    ("Aorta-Iliac-Femoral", "aif"),
+    ("Aorta-Iliac-Femoral Arteries", "aif"),
 ]
 
-DEFAULT_SERVER_URL = "http://localhost:8000"
+DEFAULT_SERVER_URL = "http://209.20.158.219:8000"
 SETTINGS_KEY_PREFIX = "DRAISegmentation"
 POLL_INTERVAL_MS = 5000
 JOB_TIMEOUT_MS = 600000  # 10 minutes
@@ -49,8 +49,8 @@ class DRAISegmentation(ScriptedLoadableModule):
         self.parent.contributors = ["DRAI Team (Deep Reasoning AI)"]
         self.parent.helpText = (
             "AI-powered segmentation for Spine/Pelvis (CT) and Aorta–Iliac–Femoral Arteries (CTA). "
-            "Upload CT volumes to the DRAI cloud and receive high-quality, multi-label masks directly in 3D Slicer within minutes."
-            "Built to handle complex cases—including bypass grafts, metal implants, and challenging pathology—with reliable accuracy."
+            "For Spine/Pelvis CT, we generate individual segmentation masks for each vertebra, as well as the pelvis and sacrum; for CTA, we segment all traceable arteries below the aortic arch. Moreover, we can separate metal."
+            "Upload CT volumes to the DRAI cloud and receive high-quality, multi-label masks directly in 3D Slicer within minutes. Built to handle complex cases—including bypass grafts, occuled arteries, extreme scoliosis, metal implants, and challenging pathology—with reliable accuracy."
             "All data is securely processed and deleted immediately after inference. Questions? Contact support@deepreasoningai.com."
             'See the <a href="https://github.com/DeepReasoningAI/SlicerDRAISegmentation">'
             "documentation</a> for more information."
@@ -166,6 +166,7 @@ class DRAISegmentationWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
             "medical image will be uploaded to the DRAI server for processing. "
             "All uploaded images are <b>deleted from our server immediately</b> "
             "after segmentation is complete. <b>No data is retained.</b>"
+            "Questions? Contact <b>support@deepreasoningai.com</b>."
             "</p>"
         )
         privacyText.wordWrap = True

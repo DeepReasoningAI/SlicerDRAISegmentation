@@ -1,17 +1,19 @@
 # DRAI Segmentation
 
-A [3D Slicer](https://www.slicer.org/) extension for AI-powered medical image segmentation of CT volumes.
+A [3D Slicer](https://www.slicer.org/) extension for Deep Reasoning Technology-powered medical image segmentation of CT volumes.
 
 ## Description
 
 DRAI Segmentation provides automatic, deep-learning-based segmentation of anatomical structures from CT scans. Volumes are uploaded to the DRAI cloud server for inference and the resulting multi-label segmentation masks are loaded directly into 3D Slicer for visualization and analysis.
 
-### Supported Models
+### Supported Models 
 
 | Model | Structures | Output Labels |
 |-------|-----------|---------------|
 | **Spine and Pelvis** | Cervical (C1-C7), Thoracic (T1-T12), Lumbar (L1-L6) vertebrae, metal implants, pelvis/hip | 1-25 (vertebrae), 29 (metal), 31+ (pelvis) |
 | **Aorta-Iliac-Femoral** | Aorta, iliac and femoral arteries, surrounding bone | 1 (artery), 2 (bone) |
+
+We will keep adding new models.
 
 ## Installation
 
@@ -53,13 +55,6 @@ Once the extension is published in the 3D Slicer Extensions Index:
 7. Wait for the segmentation to complete (progress is displayed in the progress bar)
 8. The segmentation mask is automatically loaded into the scene as a Segmentation node with 3D surface rendering
 
-### Server Configuration
-
-By default, the module connects to `http://localhost:8000`. To change the server URL:
-
-1. Expand the **Server Configuration (Advanced)** section
-2. Enter the server URL and press Enter
-
 ## Data Privacy
 
 - Your CT volume is uploaded to the DRAI server **only** for the duration of the segmentation
@@ -79,11 +74,13 @@ By default, the module connects to `http://localhost:8000`. To change the server
 
 *Module panel:*
 
-![Module UI](Screenshots/screenshot1.png)
+![Module UI](Screenshots/UI.png)
+![Spine and Pelvis Model](Screenshots/SpinePelvis.png)
+![Aorta-Illiac-Femoral Arteries Model](Screenshots/AIF.png)
 
 ## Contributing
 
-Bug reports and feature requests are welcome via [GitHub Issues](https://github.com/Deep-Reasoning/SlicerDRAISegmentation/issues).
+Bug reports and feature requests are welcome via [GitHub Issues](https://github.com/DeepReasoningAI/SlicerDRAISegmentation/issues).
 
 ## License
 
@@ -91,4 +88,4 @@ This extension is distributed under the terms of the BSD 3-Clause License. See [
 
 ## Acknowledgements
 
-Developed by **Deep Reasoning AI (DRAI)**.
+Developed by **Deep Reasoning AI (DRAI)**. Welcome to check our website: https://deepreasoningai.com/.

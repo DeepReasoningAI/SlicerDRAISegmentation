@@ -10,8 +10,9 @@ set(EXTENSION_CATEGORY "Segmentation")
 set(EXTENSION_CONTRIBUTORS "DRAI Team (Deep Reasoning AI)")
 set(EXTENSION_DESCRIPTION
   "AI-powered segmentation for Spine/Pelvis (CT) and Aorta–Iliac–Femoral Arteries (CTA). "
+  "For Spine/Pelvis CT, we generate individual segmentation masks for each vertebra, as well as the pelvis and sacrum; for CTA, we segment all traceable arteries below the aortic arch. Moreover, we can separate metal."
   "Upload CT volumes to the DRAI cloud and receive high-quality, multi-label masks directly in 3D Slicer within minutes."
-  "Built to handle complex cases—including bypass grafts, metal implants, and challenging pathology—with reliable accuracy."
+  "Built to handle complex cases—including bypass grafts, occuled arteries, extreme scoliosis, metal implants, and challenging pathology—with reliable accuracy."
   "All data is securely processed and deleted immediately after inference. Questions? Contact support@deepreasoningai.com."
 )
 set(EXTENSION_ICONURL "https://raw.githubusercontent.com/Deep-Reasoning/SlicerDRAISegmentation/main/DRAISegmentation/Resources/Icons/DRAISegmentation.png")
