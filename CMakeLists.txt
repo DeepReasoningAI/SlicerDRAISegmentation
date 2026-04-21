@@ -15,9 +15,11 @@ set(EXTENSION_DESCRIPTION
   "Built to handle complex cases—including bypass grafts, occuled arteries, extreme scoliosis, metal implants, and challenging pathology—with reliable accuracy."
   "All data is securely processed and deleted immediately after inference. Questions? Contact support@deepreasoningai.com."
 )
-set(EXTENSION_ICONURL "https://raw.githubusercontent.com/Deep-Reasoning/SlicerDRAISegmentation/main/DRAISegmentation/Resources/Icons/DRAISegmentation.png")
+set(EXTENSION_ICONURL "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/DRAISegmentation/Resources/Icons/DRAISegmentation.jpg")
 set(EXTENSION_SCREENSHOTURLS
-  "https://raw.githubusercontent.com/Deep-Reasoning/SlicerDRAISegmentation/main/Screenshots/screenshot1.png"
+  "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/Screenshots/UI.png"
+  "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/Screenshots/SpinePelvis.png"
+  "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/Screenshots/AIF.png"
 )
 set(EXTENSION_DEPENDS "NA")
 set(EXTENSION_BUILD_SUBDIRECTORY inner-build)
