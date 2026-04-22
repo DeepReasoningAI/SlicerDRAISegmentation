@@ -16,7 +16,7 @@ set(EXTENSION_DESCRIPTION
   "All data is securely processed and deleted immediately after inference. Questions? Contact support@deepreasoningai.com."
 )
 set(EXTENSION_ICONURL "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/DRAISegmentation/Resources/Icons/DRAISegmentation.jpg")
-set(EXTENSION_SCREENSHOTURLS "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/Screenshots/UI.png" "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/Screenshots/SpinePelvis.png" "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/Screenshots/AIF.png")
+set(EXTENSION_SCREENSHOTURLS "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/Screenshots/UI.png") 
 set(EXTENSION_DEPENDS "NA")
 set(EXTENSION_BUILD_SUBDIRECTORY inner-build)
 
