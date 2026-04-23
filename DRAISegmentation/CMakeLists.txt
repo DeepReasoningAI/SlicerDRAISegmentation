@@ -21,5 +21,3 @@ slicerMacroBuildScriptedModule(
   RESOURCES ${MODULE_PYTHON_RESOURCES}
   WITH_GENERIC_TESTS
 )
-
-cpack_add_component(${MODULE_NAME}_Runtime)
