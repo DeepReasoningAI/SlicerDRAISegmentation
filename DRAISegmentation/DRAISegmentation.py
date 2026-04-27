@@ -36,6 +36,14 @@ POLL_INTERVAL_MS = 5000
 JOB_TIMEOUT_MS = 600000  # 10 minutes
 
 
+class DRAISegmentationApiError(RuntimeError):
+    """User-facing server error returned by the DRAI API."""
+
+    def __init__(self, message: str, status_code: Optional[int] = None):
+        self.status_code = status_code
+        super().__init__(message)
+
+
 # ---------------------------------------------------------------------------
 # Module descriptor
 # ---------------------------------------------------------------------------
@@ -445,7 +453,7 @@ class DRAISegmentationLogic(ScriptedLoadableModuleLogic):
                     headers=self._headers(),
                     timeout=300,
                 )
-            resp.raise_for_status()
+            self._raiseForApiError(resp)
             data = resp.json()
         else:
             data = self._postMultipart(url, niftiPath, model)
@@ -462,7 +470,7 @@ class DRAISegmentationLogic(ScriptedLoadableModuleLogic):
 
         if HAS_REQUESTS:
             resp = requests.get(url, headers=self._headers(), timeout=15)
-            resp.raise_for_status()
+            self._raiseForApiError(resp)
             data = resp.json()
         else:
             data = self._getJson(url)
@@ -480,7 +488,7 @@ class DRAISegmentationLogic(ScriptedLoadableModuleLogic):
 
         if HAS_REQUESTS:
             resp = requests.get(url, headers=self._headers(), timeout=300, stream=True)
-            resp.raise_for_status()
+            self._raiseForApiError(resp)
             with open(outPath, "wb") as f:
                 for chunk in resp.iter_content(chunk_size=8192):
                     f.write(chunk)
@@ -520,6 +528,35 @@ class DRAISegmentationLogic(ScriptedLoadableModuleLogic):
 
         return segmentationNode
 
+    # ---- API error handling --------------------------------------------------
+
+    def _raiseForApiError(self, response):
+        if response.status_code < 400:
+            return
+
+        message = self._extractApiErrorMessage(response)
+        raise DRAISegmentationApiError(message, response.status_code)
+
+    @staticmethod
+    def _extractApiErrorMessage(response) -> str:
+        try:
+            data = response.json()
+            if isinstance(data, dict):
+                for key in ("detail", "message", "error"):
+                    value = data.get(key)
+                    if value:
+                        return str(value)
+            elif isinstance(data, str) and data:
+                return data
+        except Exception:
+            pass
+
+        response_text = getattr(response, "text", "").strip()
+        if response_text:
+            return response_text
+
+        return f"Server returned HTTP {response.status_code}."
+
     # ---- urllib fallback helpers ---------------------------------------------
 
     def _postJson(self, url: str, body: dict) -> dict:
@@ -533,18 +570,26 @@ class DRAISegmentationLogic(ScriptedLoadableModuleLogic):
             headers={**self._headers(), "Content-Type": "application/json"},
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            raise self._apiErrorFromHttpError(exc) from exc
 
     def _getJson(self, url: str) -> dict:
         import urllib.request
+        import urllib.error
 
         req = urllib.request.Request(url, headers=self._headers(), method="GET")
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            raise self._apiErrorFromHttpError(exc) from exc
 
     def _postMultipart(self, url: str, filepath: str, model: str) -> dict:
         import urllib.request
+        import urllib.error
 
         boundary = uuid.uuid4().hex
         lines = []
@@ -577,20 +622,48 @@ class DRAISegmentationLogic(ScriptedLoadableModuleLogic):
             },
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=300) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+        try:
+            with urllib.request.urlopen(req, timeout=300) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            raise self._apiErrorFromHttpError(exc) from exc
 
     def _downloadFile(self, url: str, outPath: str):
         import urllib.request
+        import urllib.error
 
         req = urllib.request.Request(url, headers=self._headers(), method="GET")
-        with urllib.request.urlopen(req, timeout=300) as resp:
-            with open(outPath, "wb") as f:
-                while True:
-                    chunk = resp.read(8192)
-                    if not chunk:
-                        break
-                    f.write(chunk)
+        try:
+            with urllib.request.urlopen(req, timeout=300) as resp:
+                with open(outPath, "wb") as f:
+                    while True:
+                        chunk = resp.read(8192)
+                        if not chunk:
+                            break
+                        f.write(chunk)
+        except urllib.error.HTTPError as exc:
+            raise self._apiErrorFromHttpError(exc) from exc
+
+    @staticmethod
+    def _apiErrorFromHttpError(exc) -> DRAISegmentationApiError:
+        raw_body = exc.read().decode("utf-8", errors="replace").strip()
+        message = raw_body or f"Server returned HTTP {exc.code}."
+
+        if raw_body:
+            try:
+                data = json.loads(raw_body)
+                if isinstance(data, dict):
+                    for key in ("detail", "message", "error"):
+                        value = data.get(key)
+                        if value:
+                            message = str(value)
+                            break
+                elif isinstance(data, str):
+                    message = data
+            except Exception:
+                pass
+
+        return DRAISegmentationApiError(message, exc.code)
 
 
 # ---------------------------------------------------------------------------
