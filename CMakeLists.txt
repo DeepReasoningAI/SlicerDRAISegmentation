@@ -18,16 +18,11 @@ set(EXTENSION_DESCRIPTION
 set(EXTENSION_ICONURL "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/DRAISegmentation/Resources/Icons/DRAISegmentation.jpg")
 set(EXTENSION_SCREENSHOTURLS "https://raw.githubusercontent.com/DeepReasoningAI/SlicerDRAISegmentation/main/Screenshots/UI.png") 
 set(EXTENSION_DEPENDS "NA")
-set(EXTENSION_BUILD_SUBDIRECTORY inner-build)
-
-set(SUPERBUILD_TOPLEVEL_PROJECT inner)
-
 #-----------------------------------------------------------------------------
 # Extension dependencies
 #-----------------------------------------------------------------------------
 find_package(Slicer REQUIRED)
 include(${Slicer_USE_FILE})
-mark_as_superbuild(Slicer_DIR)
 
 #-----------------------------------------------------------------------------
 # Extension modules
