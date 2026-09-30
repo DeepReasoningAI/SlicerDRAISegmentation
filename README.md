@@ -1,10 +1,10 @@
-# DRAI Segmentation
+# DRAI Segmentation and 3D Modeling
 
-A [3D Slicer](https://www.slicer.org/) extension for Deep Reasoning Technology-powered medical image segmentation of CT volumes.
+A [3D Slicer](https://www.slicer.org/) extension for Deep Reasoning Technology-powered medical image segmentation and 3D surface modeling of CT and CTA volumes.
 
 ## Description
 
-DRAI Segmentation provides automatic, deep-learning-based segmentation of anatomical structures from CT scans. Volumes are uploaded to the DRAI cloud server for inference and the resulting multi-label segmentation masks are loaded directly into 3D Slicer for visualization and analysis.
+DRAI Segmentation and 3D Modeling provides automatic, deep-learning-based segmentation of anatomical structures from CT and CTA scans and creates 3D surface models from the results. Volumes are uploaded to the DRAI cloud server for inference. The resulting multi-label segmentation masks are loaded directly into 3D Slicer, where 3D surface models are automatically generated for visualization and analysis.
 
 ### Supported Models 
 
@@ -23,7 +23,7 @@ Once the extension is published in the 3D Slicer Extensions Index:
 
 1. Open 3D Slicer
 2. Go to **View > Extensions Manager**
-3. Search for **DRAI Segmentation**
+3. Search for **DRAISegmentation**, the extension identifier for **DRAI Segmentation and 3D Modeling**
 4. Click **Install**
 5. Restart 3D Slicer
 
@@ -47,13 +47,13 @@ Once the extension is published in the 3D Slicer Extensions Index:
 ## Usage
 
 1. Load a CT volume into 3D Slicer (drag-and-drop a DICOM folder or NIfTI file)
-2. Open the **DRAI Segmentation** module (found under the **Segmentation** category)
+2. Open the **DRAI Segmentation and 3D Modeling** module (found under the **Segmentation** category)
 3. Select the **Input Volume** from the dropdown
 4. Choose a **Model** (Spine and Pelvis, or Aorta-Iliac-Femoral)
 5. Click **Run Segmentation**
 6. Review and accept the data privacy consent dialog
 7. Wait for the segmentation to complete (progress is displayed in the progress bar)
-8. The segmentation mask is automatically loaded into the scene as a Segmentation node with 3D surface rendering
+8. The segmentation mask is automatically loaded into the scene as a Segmentation node, and 3D surface models are generated for visualization and analysis
 
 ## Data Privacy
 
